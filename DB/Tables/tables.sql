@@ -13,10 +13,10 @@ CREATE TABLE USERS (
 );
 
 CREATE TABLE friendships (
-                             id SERIAL PRIMARY KEY,
-                             requester_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-                             addressee_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-                             status TEXT NOT NULL CHECK (status IN ('pending', 'accepted', 'rejected')),
-                             created_at TIMESTAMP DEFAULT NOW(),
-                             UNIQUE(requester_id, addressee_id)
+    id SERIAL PRIMARY KEY,
+    requester_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+     addressee_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    status TEXT NOT NULL CHECK (status IN ('pending', 'accepted', 'rejected')),
+    created_at TIMESTAMP DEFAULT NOW(),
+     UNIQUE(requester_id, addressee_id)
 );
