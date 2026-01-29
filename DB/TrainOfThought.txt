@@ -32,6 +32,24 @@
 
 
 
-NEXT WE will add ROW LEVEL SECURITY ON ALL THE TABLES. 
+NEXT WE will add ROW LEVEL SECURITY ON ALL THE TABLES.
  --  Every users can see there work and also the work they are contributing to.
  -- and also they can see there
+ -- ================================================================
+ -- ROW LEVEL SECURITY AND POLICY IMPLEMENTATION
+ -- ================================================================
+ -- Purpose:
+ -- 1️⃣ Ensure every user sees only their own data in the system.
+ -- 2️⃣ Protect sensitive collaboration data like works and pending requests.
+ -- 3️⃣ Implement a security "fence" using RLS and custom policies so:
+ --      • Users can only see works they own.
+ --      • Collaborators can only see their pending requests or requests to works they own.
+ --      • Insertions into pending_contribution_requests are restricted to the requesting user.
+ -- 4️⃣ Provides a foundation for future policies (e.g., contributions, NDA access, audit logs).
+
+ -- Notes:
+ -- • All operations are done under the 'colab_app' role after granting appropriate permissions.
+ -- • Policies rely on the session variable `app.current_user_id` to identify the active user.
+ -- • DROP POLICY statements are used during testing or to replace old policies with updated rules.
+ -- • This setup ensures that superusers bypass RLS, so testing should be done with non-superuser roles.
+
