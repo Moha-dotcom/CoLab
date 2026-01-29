@@ -30,3 +30,8 @@
     -- Each pending collabration request has one  Available NDA
 -- Work_Access_record
 
+
+
+NEXT WE will add ROW LEVEL SECURITY ON ALL THE TABLES. 
+ --  Every users can see there work and also the work they are contributing to.
+ -- and also they can see there

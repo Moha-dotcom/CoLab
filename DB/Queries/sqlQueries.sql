@@ -12,6 +12,9 @@ WHERE work_id = 1 AND user_id = 2;
 -- If the Collaborator signed an NDA we Instantly give them access to Work When we
 --  Approve them
 -- We can also reject them if they did no sign an NDA.
+
+-- it approves pending contributor if they have NDAs on File.
+-- If they don't it reject Them.
 CREATE OR REPLACE FUNCTION approve_pending_contributor(
     pending_request_id BIGINT,
     owner_user_id BIGINT
