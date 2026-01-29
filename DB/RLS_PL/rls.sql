@@ -56,6 +56,6 @@ CREATE POLICY insert_pending_request_policy ON pending_contribution_requests
 
 
 
-
+SELECT * FROM pending_contribution_requests;
 
 
