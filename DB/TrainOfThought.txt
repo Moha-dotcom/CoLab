@@ -1,0 +1,32 @@
+--- ALL TABLES GO HERE
+
+
+--- User is working on idea
+--- Need Help
+--- Another user in his Circle  offer help
+--  Request Collaboration as Editor/Contributor ( pending_collaboration
+--  Owner of the Work Checks List of Requested Collabolation
+--  Either Approves or Rejected Collaboration
+--  Once Collaborator is Accepted
+--  We keep track of the Collaborator and their Contributions
+-- This data is Immutable.
+-- Work_Owner can Block a collaborator from Seeing his work.
+
+-- Pending Collaborator
+-- Collaborator
+-- Contributions ( Who contributed and What was Contributed )
+
+--- User  - User - works 1 - MANY
+        -- User --  Work  user can request many works
+-- - Works   - > Work - Users 1 - Many Users It can be Owner or Collaborators
+    -- Works - Collaborator 1 work can have many collaborators
+-- - Collaborator
+        -- Users - 1 - Many Collaborator - One user can collaborate on Many Work
+
+
+-- - Contributions
+-- - pending_Collaboration_request
+--- Nadas
+    -- Each pending collabration request has one  Available NDA
+-- Work_Access_record
+
