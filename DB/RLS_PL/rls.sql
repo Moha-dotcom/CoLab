@@ -1,20 +1,26 @@
 --- ROW LEVEL SECURITY AND POLICIES IMPLEMENTATION
+-- This is where we fix and make sure everyone see there data based on  ID or Primary Keys
 
-    -- This is where we fix and make sure everyone see there data based on there ID
 
---Worked on ROW LEVEL SECURITY
+--Worked on ROW LEVEL SECURITY - Makes sure that Everyone has access to their Own Data
+
 -- Every user can have access to the
 
-SET ROLE colab_admin;
+SET ROLE colab_admin; --  Admin Controls who has access to the Public Schemas and Tables
+SET ROLE colab_app; -- App roles Has access to any data that is granted by admi
+-- Giving access to app to be able to see Who is collaborating
+-- On their work
 GRANT SELECT ON collaborators TO colab_app;
+
 GRANT SELECT on pending_contribution_requests TO colab_app;
 GRANT INSERT on pending_contribution_requests TO colab_app;
 
 
 
-SET ROLE colab_app;
+
 
 ALTER TABLE WORKS ENABLE  ROW  LEVEL SECURITY;
+--- ID of the Current User is 3. So this user gets to see his data
 SET app.current_user_id = '3';
 show app.current_user_id;
 
