@@ -15,6 +15,41 @@ CREATE TABLE users (
     updated_at timestamptz DEFAULT  now()NOT NULL
 );
 
+ALTER TABLE  USERS ALTER COLUMN ID TYPE BIGINT;
+
+CREATE TABLE pending_friends_list (
+         id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+         requested_id BIGINT  NOT NULL REFERENCES users(id )   ON DELETE CASCADE,
+         requestor_id BIGINT  NOT NULL REFERENCES users(id )   ON DELETE CASCADE,
+         status text CHECK ( status IN ('pending', 'approved', 'rejected') ),
+         created_at timestamptz DEFAULT now() NOT NULL ,
+         delete_at timestamptz DEFAULT  now() NOT NULL ,
+         updated_at timestamptz DEFAULT  now()NOT NULL,
+
+        unique (requested_id, requestor_id), -- we want unique request. No duplicate requests
+        check ( requested_id <> requestor_id) -- checks self friend request
+);
+
+DROP TABLE pending_friends_list;
+
+
+CREATE TABLE FRIENDS (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id BIGINT  NOT NULL REFERENCES users(id )   ON DELETE CASCADE,
+   friend_id BIGINT  NOT NULL REFERENCES users(id )   ON DELETE CASCADE,
+    friendship_started_date timestamptz NOT NULL  DEFAULT now(),
+    created_at timestamptz DEFAULT now() NOT NULL ,
+    delete_at timestamptz DEFAULT  now() NOT NULL ,
+    updated_at timestamptz DEFAULT  now()NOT NULL,
+
+    unique (user_id, friend_id),
+    check ( user_id <> friend_id) -- checks self friend request
+);
+
+
+
+
+
 
 
 

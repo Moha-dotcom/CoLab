@@ -14,6 +14,14 @@ GRANT SELECT ON collaborators TO colab_app;
 
 GRANT SELECT on pending_contribution_requests TO colab_app;
 GRANT INSERT on pending_contribution_requests TO colab_app;
+GRANT SELECT ON collaborators TO colab_app;
+GRANT SELECT on contributions TO colab_app;
+GRANT SELECT on pending_friends_list TO colab_app;
+GRANT SELECT(id, full_name , username, profile_picture, bio ) on users TO colab_app ;
+-- Revoke then Grant
+REVOKE SELECT(id, username, profile_picture, bio ) on users FROM colab_app;
+
+SELECT current_user;
 
 
 
@@ -21,8 +29,9 @@ GRANT INSERT on pending_contribution_requests TO colab_app;
 
 ALTER TABLE WORKS ENABLE  ROW  LEVEL SECURITY;
 --- ID of the Current User is 3. So this user gets to see his data
-SET app.current_user_id = '3';
+SET app.current_user_id = '1';
 show app.current_user_id;
+
 
 SELECT * FROM users u
 JOIN works w ON u.id = w.owner_id;
@@ -60,8 +69,16 @@ CREATE POLICY insert_pending_request_policy ON pending_contribution_requests
     FOR INSERT
     WITH CHECK (user_id = current_setting('app.current_user_id')::BIGINT);
 
+ALTER TABLE pending_friends_list ENABLE ROW LEVEL SECURITY ;
+CREATE POLICY get_pending_friend_list_policy ON pending_friends_list
+FOR SELECT
+USING(requestor_id = current_setting('app.current_user_id')::BIGINT OR
+      requested_id =  current_setting('app.current_user_id')::BIGINT);
+
+DROP POLICY get_pending_friend_list_policy on pending_friends_list;
+SET ROLE colab_app;
+SET app.current_user_id = '2';
 
 
-SELECT * FROM pending_contribution_requests;
 
-
+SELECT * FROM contributions;
