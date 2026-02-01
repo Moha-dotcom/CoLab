@@ -6,6 +6,11 @@ SHOW max_connections;
 
 -- it approves pending contributor if they have NDAs on File.
 -- If they don't it reject Them.
+
+
+
+
+
 CREATE OR REPLACE FUNCTION approve_pending_contributor(
     pending_request_id BIGINT,
     owner_user_id BIGINT
