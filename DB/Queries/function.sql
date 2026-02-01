@@ -2,9 +2,10 @@
 -- If the Collaborator signed an NDA we Instantly give them access to Work When we
 --  Approve them
 -- We can also reject them if they did no sign an NDA.
+SHOW max_connections;
 
 -- it approves pending contributor if they have NDAs on File.
--- If they doesn't it reject Them.
+-- If they don't it reject Them.
 CREATE OR REPLACE FUNCTION approve_pending_contributor(
     pending_request_id BIGINT,
     owner_user_id BIGINT
@@ -113,7 +114,8 @@ SET ROLE colab_admin;
 
 
 DROP FUNCTION send_friend_request(requestor_id BIGINT, requested_id BIGINT)
-SELECT * FROM pending_friends_list
+
+
 
 
 
