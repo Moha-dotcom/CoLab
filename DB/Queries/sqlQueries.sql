@@ -5,9 +5,16 @@
 SET ROLE colab_app;
 SET app.current_user_id = '1';
 
+SELECT   jsonb_build_object(
+  'id', users.id,
+  'username', users.username,
+         'profile' , profile_picture
+) AS user
+ FROM users;
 
 SELECT * FROM work_access_records;
 SELECT * FROM pending_contribution_requests;
+
 
 UPDATE pending_contribution_requests
 set nda_signed  = true

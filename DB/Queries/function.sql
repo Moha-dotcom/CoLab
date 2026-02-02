@@ -5,10 +5,7 @@
 SHOW max_connections;
 
 -- it approves pending contributor if they have NDAs on File.
--- If they don't it reject Them.
-
-
-
+-- If they Don't it reject Them.
 
 
 CREATE OR REPLACE FUNCTION approve_pending_contributor(
