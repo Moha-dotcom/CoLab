@@ -4,12 +4,9 @@
 
 SET ROLE colab_app;
 SET app.current_user_id = '1';
-
-SELECT   jsonb_build_object(
-  'id', users.id,
-  'username', users.username,
-         'profile' , profile_picture
-) AS user
+-- get users id, username, profile_picture
+SELECT   jsonb_build_object( 'id', users.id, 'username', users.username,
+         'profile' , profile_picture ) AS user
  FROM users;
 
 SELECT * FROM work_access_records;
